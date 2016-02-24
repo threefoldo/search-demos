@@ -16,7 +16,7 @@
   <div class="header fixed">
     <a href="#mmenu"></a>
     <span>instant search:</span>
-    <input id="search">
+    <input id="search" type="text" placeholder="search movies...">
   </div>
 </template>
 
@@ -30,13 +30,20 @@
   <div class="content">
     <table>
       <tbody>
-        {{#each movies}}
-        <tr class="entry">
-          <td class="title">{{title}}</td>
-          <td class="yeartype">{{yeartype}}</td>
-          <td class="episode">{{episode}}</td>
-          <td class="outline">{{outline}}</td>
-          <td class="credit">{{credit}}</td>
+        <tr>
+          <th width="10%">title</th>
+          <th width="10%">yeartype</th>
+          <th width="10%">episode</th>
+          <th width="50%">outline</th>
+          <th width="20%">credit</th>
+        </tr>
+        {{#each search}}
+        <tr>
+          <td width="10%">{{{title}}}</td>
+          <td width="10%">{{{yeartype}}}</td>
+          <td width="10%">{{{episode}}}</td>
+          <td width="50%">{{{outline}}}</td>
+          <td width="20%">{{{credit}}}</td>
         </tr>
         {{/each}}
       </tbody>

@@ -1,11 +1,35 @@
 Movies = new Meteor.Collection('Movies');
 
+var options = {
+    keepHistory: 1000 * 60 * 5,
+    localSearch: true
+};
+
+var fields = ['title', 'yeartype', 'episode', 'outline', 'credit'];
+MovieSearch = new SearchSource('movies', fields, options);
+
 Template.content.helpers({
     movies: function() {
         var genre = Session.get('genre') || '';
         var keyword = Session.get('search');
         return Movies.find({});
+    },
+    search: function() {
+        return MovieSearch.getData({
+            transform: function(matchText, regExp) {
+                return matchText.replace(regExp, "<font color=\"coral\">$&</font>");
+            },
+            sort: {isoScore: -1}
+        });
     }
+});
+
+Template.header.events({
+    "keyup #search": _.throttle(function(e) {
+        var text = $(e.target).val().trim();
+        // console.log(text);
+        MovieSearch.search(text);
+    }, 500)
 });
 
 Template.menu.helpers({
