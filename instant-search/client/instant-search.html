@@ -1,14 +1,65 @@
 <head>
   <title>instant-search</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
+  <div id="page">
+    {{> header}}
+    {{> content}}
+    {{> footer}}
+    {{> menu}}
+  </div>
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="header">
+  <div class="header fixed">
+    <a href="#mmenu"></a>
+    <span>instant search:</span>
+    <input id="search">
+  </div>
+</template>
+
+<template name="footer">
+  <div class="footer fixed">
+    Powered By Meteor
+  </div>
+</template>
+
+<template name="content">
+  <div class="content">
+    <table>
+      <tbody>
+        {{#each movies}}
+        <tr class="entry">
+          <td class="title">{{title}}</td>
+          <td class="yeartype">{{yeartype}}</td>
+          <td class="episode">{{episode}}</td>
+          <td class="outline">{{outline}}</td>
+          <td class="credit">{{credit}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</template>
+
+<template name="menu">
+  <nav id="mmenu">
+    <ul>
+      {{#each genres}}
+      <li class="genre"><a href="#">{{this}}</a></li>
+      {{/each}}
+    </ul>
+  </nav>
+</template>
+
+<template name="entry">
+  <li class="entry">
+    <span class="title">{{title}}</span>
+    <span class="yeartype">{{yeartype}}</span>
+    <span class="episode">{{episode}}</span>
+    <span class="outline">{{outline}}</span>
+    <span class="credit">{{credit}}</span>
+  </li>
 </template>
