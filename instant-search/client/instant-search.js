@@ -8,12 +8,24 @@ var options = {
 var fields = ['title', 'yeartype', 'episode', 'outline', 'credit'];
 MovieSearch = new SearchSource('movies', fields, options);
 
+Tracker.autorun(function(){
+    // refresh content
+    MovieSearch.search(Session.get('searchText'), {
+        genre: Session.get('genre')
+    });
+});
+
+FlowRouter.route('/', {
+    name: "home",
+    action: function(path, params) {
+        if (params.genre) {
+            // console.log(params.genre);
+            Session.set('genre', params.genre);
+        }
+    }
+});
+
 Template.content.helpers({
-    movies: function() {
-        var genre = Session.get('genre') || '';
-        var keyword = Session.get('search');
-        return Movies.find({});
-    },
     search: function() {
         return MovieSearch.getData({
             transform: function(matchText, regExp) {
@@ -24,26 +36,8 @@ Template.content.helpers({
     }
 });
 
-Template.header.events({
-    "keyup #search": _.throttle(function(e) {
-        var text = $(e.target).val().trim();
-        // console.log(text);
-        MovieSearch.search(text);
-    }, 500)
-});
-
-Template.menu.helpers({
-    genres: function() {
-        // return Movies.find({}, {fields: {yeartype: true}});
-        return _.uniq(_.flatten(Movies.find({}, {
-            fields: {genre: true}
-        }).fetch().map(function(x) {
-            return x.genre;
-        })).sort(), true);
-    }
-});
-
 Template.content.rendered = function() {
+    // initialize mobile-menu
     $('#mmenu').mmenu({
         classes: "mm-white",
         header: true,
@@ -60,10 +54,30 @@ Template.content.rendered = function() {
             setSelected: true
         }
     });
-}
+};
 
-Template.content.events({
-    'click .genre': function (e) {
+Template.header.events({
+    "keyup #search": _.throttle(function(e) {
+        var text = $(e.target).val().trim();
+        // console.log(text);
+        Session.set('searchText', text);
+    }, 500)
+});
 
+Template.menu.helpers({
+    genres: function() {
+        // get distinct 'genre'
+        return _.uniq(_.flatten(Movies.find({}, {
+            fields: {genre: true}
+        }).fetch().map(function(x) {
+            return x.genre;
+        })).sort(), true);
+    }
+});
+
+Template.menu.events({
+    'click .genre': function(e) {
+        // click event will not execute but should exist
+        // otherwise the item cannot be selected, not sure why
     }
 });
