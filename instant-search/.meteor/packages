@@ -23,3 +23,8 @@ meteorhacks:search-source
 check
 ejson
 kadira:flow-router
+peerlibrary:dimsum
+sjors:meteor-masonry
+velocityjs:velocityjs
+less
+twbs:bootstrap

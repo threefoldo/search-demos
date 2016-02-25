@@ -4,69 +4,18 @@
 </head>
 
 <body>
-  <div id="page">
-    {{> header}}
-    {{> content}}
-    {{> footer}}
-    {{> menu}}
-  </div>
+  {{> content}}
 </body>
-
-<template name="header">
-  <div class="header fixed">
-    <a href="#mmenu"></a>
-    <span>instant search:</span>
-    <input id="search" type="text" placeholder="search movies...">
-  </div>
-</template>
-
-<template name="footer">
-  <div class="footer fixed">
-    Powered By Meteor
-  </div>
-</template>
 
 <template name="content">
   <div class="content">
-    <table>
-      <tbody>
-        <tr>
-          <th width="10%">title</th>
-          <th width="10%">yeartype</th>
-          <th width="10%">episode</th>
-          <th width="50%">outline</th>
-          <th width="20%">credit</th>
-        </tr>
-        {{#each search}}
-        <tr>
-          <td width="10%">{{{title}}}</td>
-          <td width="10%">{{{yeartype}}}</td>
-          <td width="10%">{{{episode}}}</td>
-          <td width="50%">{{{outline}}}</td>
-          <td width="20%">{{{credit}}}</td>
-        </tr>
+    {{> search}}
+    <nav id="mmenu">
+      <ul>
+        {{#each genres}}
+        <li class="genre"><a href="/?genre={{this}}">{{this}}</a></li>
         {{/each}}
-      </tbody>
-    </table>
+      </ul>
+    </nav>
   </div>
-</template>
-
-<template name="menu">
-  <nav id="mmenu">
-    <ul>
-      {{#each genres}}
-      <li class="genre"><a href="/?genre={{this}}">{{this}}</a></li>
-      {{/each}}
-    </ul>
-  </nav>
-</template>
-
-<template name="entry">
-  <li class="entry">
-    <span class="title">{{title}}</span>
-    <span class="yeartype">{{yeartype}}</span>
-    <span class="episode">{{episode}}</span>
-    <span class="outline">{{outline}}</span>
-    <span class="credit">{{credit}}</span>
-  </li>
 </template>

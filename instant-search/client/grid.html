@@ -1,0 +1,15 @@
+<template name="masonryGrid">
+<div class='masonry'>
+{{#each items}}
+{{> UI.dynamic template=../template data=this}}
+{{else}}
+<div class="no-result">
+  <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+  <br/>
+  no results
+  <br/>
+  <span class='small'>search for things like "breaking bad", "video game", &hellip;</span>
+</div>
+{{/each}}
+</div>
+</template>

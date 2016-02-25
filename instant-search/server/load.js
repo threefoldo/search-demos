@@ -1,5 +1,3 @@
-Movies = new Meteor.Collection('Movies');
-
 var process_data = function(item) {
     item.credit = item.credit.replace(/\n/g, '').trim();
     item.genre = item.genre.replace(/\s/g, '').split('|');

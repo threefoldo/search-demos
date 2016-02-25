@@ -1,0 +1,41 @@
+<template name="search">
+<div class="jumbotron">
+  <div class='inner-container'>
+    <div class='meteor'></div>
+    <h1>Instant Search Demo</h1>
+    <br/>
+    <div class="input-group input-group-lg">
+      <span class="input-group-addon" id="btn-mmenu"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></span>
+      <span class="input-group-addon" id="btn-search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+      <input type="text" class="form-control" placeholder="type to search" aria-describedby="sizing-addon1">
+    </div>
+  </div>
+  <div class='inner-container credentials'>
+  </div>
+</div>
+<div class="inner-container search">
+  {{> masonryGrid template='brick' items=results}}
+</div>
+<div class='fixed'>
+  {{#if loading}}
+  <div class="loading alert alert-info" role="alert">
+    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+    loading ({{{pageState}}})
+  </div>
+  {{/if}}
+</div>
+</template>
+
+<template name="brick">
+<div class="brick panel panel-default">
+   <div class="panel-heading">
+     <h3 class="panel-title">{{{title}}}</h3>
+     {{{episode}}} <br>
+     {{{yeartype}}}
+  </div>
+  <div class="panel-body">
+    <p> {{{outline}}} </p>
+    <p> {{{credit}}} </p>
+  </div>
+</div>
+</template>
