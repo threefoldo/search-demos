@@ -29,12 +29,27 @@ Template.content.rendered = function() {
 };
 
 Template.content.helpers({
-    genres: function() {
-        // get distinct 'genre'
-        return _.uniq(_.flatten(Movies.find({}, {
-            fields: {genre: true}
-        }).fetch().map(function(x) {
-            return x.genre;
-        })).sort(), true);
+    items: function() {
+        // get all records, group by type
+        var groups = _.groupBy(Movies.find({}, {
+            fields: {type: true, genre: true}
+        }).fetch(), function(r) {
+            return r.type;
+        });
+        // reduce
+        var result = [];
+        _.map(_.keys(groups), function(key) {
+            var r = _.reduce(groups[key], function(r1, r2) {
+                return {
+                    type: r1.type,
+                    genre: _.union(r1.genre, r2.genre)
+                };
+            });
+            if (r.type.length > 0) {
+                r.genre = r.genre.sort();
+                result.push(r);
+            }
+        });
+        return result;
     }
 });

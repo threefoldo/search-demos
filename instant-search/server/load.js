@@ -2,6 +2,9 @@ var process_data = function(item) {
     item.credit = item.credit.replace(/\n/g, '').trim();
     item.genre = item.genre.replace(/\s/g, '').split('|');
     item.yeartype = item.yeartype.replace(/\(|\)/g, '');
+    var t = item.yeartype.split(' ', 2);
+    item.year = t[0];
+    item.type = item.yeartype.replace(item.year, '').trim();
     // console.log(item);
     return item;
 };
