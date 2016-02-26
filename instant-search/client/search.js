@@ -1,8 +1,13 @@
 var lastQuery = "";
+var lastType = "";
+var lastGenre = "";
 
 Session.setDefault('pageSize', 6);
 Session.setDefault('page', 0);
 Session.setDefault('loading', true);
+Session.setDefault('type', '');
+Session.setDefault('genre', '');
+Session.setDefault('query', '');
 
 var fields = ['title', 'yeartype', 'episode', 'outline', 'credit'];
 Search = new SearchSource('movies', fields, {
@@ -11,33 +16,37 @@ Search = new SearchSource('movies', fields, {
 });
 
 Template.search.onCreated(function(){
-  var self = this;
-  self.autorun(function(){
-    var size = Session.get('pageSize'),
+    var self = this;
+    self.autorun(function(){
+        var size, page, cat, genre, query;
+        // change 'type', 'genre', 'query' to refresh
         page = Session.get('page');
-    if(!!lastQuery){
-      Search.search(lastQuery, {
-        skip: page*size,
-        limit: size
-      });
-    }
+        size = Session.get('size');
+        cat = Session.get('type');
+        genre = Session.get('genre');
+        query = Session.get('query');
+        if (query === lastQuery &&
+            cat === lastType &&
+            genre === lastGenre) {
+            Search.search(query, {
+                skip: page * size,
+                limit: size,
+                cat: cat,
+                genre: genre
+            });
+      } else {
+          Search.search(query, {
+              skip: 0,
+              limit: size,
+              cat: cat,
+              genre: genre
+          });
+          Session.set('page', 0);
+          lastQuery = query;
+          lastType = cat;
+          lastGenre = genre;
+      }
   });
-});
-
-var scrollListener = _.debounce(function() {
-    var diff = $(document).height()-$(window).height();
-    // All the taxing stuff you do
-    if ($(window).scrollTop() === diff){
-        Session.set('page', Session.get('page') + 1);
-    }
-}, 50);
-
-Template.search.onCreated(function(){
-    window.addEventListener('scroll', scrollListener);
-});
-
-Template.search.onDestroyed(function(){
-    window.removeEventListener('scroll', scrollListener);
 });
 
 Template.search.onRendered(function(){
@@ -90,8 +99,11 @@ Template.search.helpers({
         return !!state.loading;
     },
     pageState: function(){
-        var size = Session.get('pageSize'),
+        var size, page;
+        Tracker.nonreactive(function(){
+            size = Session.get('pageSize'),
             page = Session.get('page');
+        });
         return [page*size, (page+1)*size].join('&nbsp;-&nbsp;');
     }
 });
@@ -100,28 +112,15 @@ Template.search.events({
     "keyup input": _.throttle(function(e, t) {
         var query = $(e.target).val().trim();
         if(query && query.length > 0){
-            if(query !== lastQuery){
-                Session.set('page', 0);
-                var size = Session.get('pageSize');
-                lastQuery.text = query;
-
-                Search.search(query, {
-                    skip: 0,
-                    limit: size
-                });
-            }
+            Session.set('query', query);
         } else {
-            //clear result
-            lastQuery = query;
-            Search.store.remove({});
+            Session.set('query', '');
         }
     }, 500),
     "click #btn-mmenu": function(event) {
-        console.log("open mmenu");
         $("#mmenu").trigger("open.mm");
     },
     "click #btn-search": function(event) {
-        console.log("close mmenu");
         $("#mmenu").trigger("close.mm");
     }
 });

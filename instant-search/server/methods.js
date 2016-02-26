@@ -9,6 +9,9 @@ SearchSource.defineSource('movies', function(searchText, options){
     if (options.genre) {
         selector.push({genre: options.genre});
     }
+    if (options.cat) {
+        selector.push({type: options.cat});
+    }
     if (searchText) {
         selector.push({
             "$text": {"$search": searchText}

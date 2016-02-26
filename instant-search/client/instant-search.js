@@ -2,17 +2,15 @@ FlowRouter.route('/', {
     name: "home",
     action: function(path, params) {
         if (params.genre) {
-            if (params.genre) {
-                Session.set('genre', params.genre);
-            }
-            if (params.type) {
-                Session.set('type',  params.type);
-            }
+            Session.set('genre', params.genre);
+        }
+        if (params.type) {
+            Session.set('type',  params.type);
         }
     }
 });
 
-Template.content.rendered = function() {
+Template.mmenu.rendered = function() {
     // initialize mobile-menu
     $('#mmenu').mmenu({
         classes: "mm-white",
@@ -31,7 +29,7 @@ Template.content.rendered = function() {
     });
 };
 
-Template.content.helpers({
+Template.mmenu.helpers({
     items: function() {
         // get all records, group by type
         var groups = _.groupBy(Movies.find({}, {
