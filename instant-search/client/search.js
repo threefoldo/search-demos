@@ -89,7 +89,7 @@ Template.search.helpers({
 
         return Search.getData({
             transform: function(matchText, regExp) {
-                console.log("transform:", matchText, regExp);
+                // console.log("transform:", matchText, regExp);
                 return matchText.replace(regExp, "<font color=\"coral\">$&</font>");
             },
             limit:(page+1)*size

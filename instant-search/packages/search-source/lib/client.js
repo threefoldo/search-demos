@@ -221,7 +221,7 @@ SearchSource.prototype._buildRegExp = function(query) {
   var afterFilteredRegExpChars = query.replace(this._getRegExpFilterRegExp(), "\\$&");
   var parts = afterFilteredRegExpChars.trim().split(' ');
     parts = _.map(parts, function(p){
-        return p.replace("ing", "");
+        return Stemmer(p);
     });
   return new RegExp("(" + parts.join('|') + ")", "ig");
 };

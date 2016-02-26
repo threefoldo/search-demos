@@ -11,7 +11,7 @@ Npm.depends({
 
 Package.onUse(function(api) {
   configurePackage(api);
-  api.export(['SearchSource']);
+    api.export(['SearchSource', 'Stemmer']);
 });
 
 Package.onTest(function(api) {
@@ -28,7 +28,6 @@ function configurePackage(api) {
   ], ['client']);
 
   api.use(['ejson', 'check', 'ddp'], ['server']);
-
   api.use('meteorhacks:picker@1.0.1', 'server');
 
   api.add_files([
@@ -36,6 +35,7 @@ function configurePackage(api) {
   ], ['server']);
 
   api.add_files([
-    'lib/client.js',
+      'lib/client.js',
+      'lib/porter.js'
   ], ['client']);
 }
