@@ -2,8 +2,12 @@ FlowRouter.route('/', {
     name: "home",
     action: function(path, params) {
         if (params.genre) {
-            // console.log(params.genre);
-            Session.set('genre', params.genre);
+            if (params.genre) {
+                Session.set('genre', params.genre);
+            }
+            if (params.type) {
+                Session.set('type',  params.type);
+            }
         }
     }
 });
@@ -12,18 +16,17 @@ Template.content.rendered = function() {
     // initialize mobile-menu
     $('#mmenu').mmenu({
         classes: "mm-white",
-        header: true,
-        buttonbar: "Buttonbar",
+        header: false,
         counters: true,
-        offCanvas: {
-            position: "left",
-            zposition: "front"
-        },
         onClick: {
             blockUI: false,
             close: true,
             preventDefault: false,
-            setSelected: true
+            setSelected: true,
+        },
+        offCanvas: {
+            position: "left",
+            zposition: "front"
         }
     });
 };
@@ -46,7 +49,12 @@ Template.content.helpers({
                 };
             });
             if (r.type.length > 0) {
-                r.genre = r.genre.sort();
+                r.genres = _.map(r.genre.sort(), function(t){
+                    return {
+                        type: r.type,
+                        genre: t
+                    };
+                });
                 result.push(r);
             }
         });

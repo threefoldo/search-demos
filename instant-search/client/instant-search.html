@@ -10,23 +10,19 @@
 <template name="content">
   <div class="content">
     {{> search}}
-    <nav id="mmenu">
-      <div class="mm-panel">
-        <ul class="mm-listview">
-          {{#each items}}
-          <li><a class="mm-next" href="#sub-{{type}}" data-target="#sub-{{type}}"></a>
-          <span>{{type}}</span>
-        </li>
-        <div id="sub-{{type}}" class="mm-panel">
+  </div>
+  <nav id="mmenu">
+      <ul>
+        {{#each items}}
+        <li>
+          <a href="/?type={{type}}">{{type}}</a>
           <ul>
-            {{#each genre}}
-            <li><a href="/?genre={{this}}">{{this}}</a></li>
+            {{#each genres}}
+            <li><a href="/?type={{type}}&genre={{genre}}">{{genre}}</a></li>
             {{/each}}
           </ul>
-        </div>
+        </li>
         {{/each}}
       </ul>
-      </div>
-    </nav>
-  </div>
+  </nav>
 </template>
