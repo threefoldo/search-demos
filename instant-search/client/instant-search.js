@@ -1,11 +1,12 @@
 FlowRouter.route('/', {
     name: "home",
     action: function(path, params) {
-        if (params.genre) {
-            Session.set('genre', params.genre);
-        }
         if (params.type) {
             Session.set('type',  params.type);
+            Session.set('genre',  "");
+        }
+        if (params.genre) {
+            Session.set('genre', params.genre);
         }
     }
 });
