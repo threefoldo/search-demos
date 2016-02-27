@@ -13,20 +13,13 @@ FlowRouter.route('/', {
 
 Template.mmenu.onRendered(function() {
     // initialize mobile-menu
-    $('#mmenu').mmenu({
-        classes: "mm-white",
-        header: false,
-        counters: true,
-        onClick: {
-            blockUI: false,
-            close: true,
-            preventDefault: false,
-            setSelected: true,
-        },
-        offCanvas: {
-            position: "left",
-            zposition: "front"
-        }
+    $('#mmenu').slimmenu({
+        resizeWidth: '480',
+        collapserTitle: 'Main Menu',
+        animSpeed: 'medium',
+        easingEffect: null,
+        indentChildren: false,
+        childrenIndenter: '&nbsp;'
     });
 });
 

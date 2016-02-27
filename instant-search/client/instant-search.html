@@ -8,14 +8,14 @@
 </body>
 
 <template name="content">
+  {{> mmenu}}
   <div class="content">
     {{> search}}
   </div>
-  {{> mmenu}}
 </template>
 <template name="mmenu">
-  <nav id="mmenu">
-      <ul>
+  <div>
+      <ul id="mmenu" class="slimmenu">
         {{#each items}}
         <li>
           <a href="/?type={{type}}">{{type}}</a>
@@ -27,5 +27,5 @@
         </li>
         {{/each}}
       </ul>
-  </nav>
+  </div>
 </template>
