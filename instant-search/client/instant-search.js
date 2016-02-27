@@ -11,7 +11,7 @@ FlowRouter.route('/', {
     }
 });
 
-Template.mmenu.rendered = function() {
+Template.mmenu.onRendered(function() {
     // initialize mobile-menu
     $('#mmenu').mmenu({
         classes: "mm-white",
@@ -28,7 +28,7 @@ Template.mmenu.rendered = function() {
             zposition: "front"
         }
     });
-};
+});
 
 Template.mmenu.helpers({
     items: function() {
