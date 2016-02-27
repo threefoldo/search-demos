@@ -12,22 +12,7 @@ FlowRouter.route('/', {
 });
 
 Template.mmenu.onRendered(function() {
-    // initialize mobile-menu
-    $('#mmenu').mmenu({
-        classes: "mm-white",
-        header: false,
-        counters: true,
-        onClick: {
-            blockUI: false,
-            close: true,
-            preventDefault: false,
-            setSelected: true,
-        },
-        offCanvas: {
-            position: "left",
-            zposition: "front"
-        }
-    });
+
 });
 
 Template.mmenu.helpers({
