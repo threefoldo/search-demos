@@ -12,7 +12,7 @@ FlowRouter.route('/', {
 });
 
 Template.mmenu.onRendered(function() {
-
+    $.SmartMenus.Bootstrap.init();
 });
 
 Template.mmenu.helpers({

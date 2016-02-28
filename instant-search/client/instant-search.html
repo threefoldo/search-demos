@@ -14,12 +14,23 @@
   </div>
 </template>
 <template name="mmenu">
-  <div class="btn-group">
-    <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">Action <span class="caret"></span></button>
-    <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+  <div class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+  </div>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+      <li><a href="#">Dropdown<span class="caret"></span></a>
+      <ul class="dropdown-menu">
       {{#each items}}
-      <li class="dropdown-submenu">
-        <a href="/?type={{type}}">{{type}}</a>
+      <li><a href="/?type={{type}}">{{type}}
+          <span class="caret"></span>
+        </a>
         <ul class="dropdown-menu">
           {{#each genres}}
           <li>
@@ -30,6 +41,9 @@
         </ul>
       </li>
       {{/each}}
-    </ul>
+      </ul>
+      </li>
+      </ul>
+  </div>
   </div>
 </template>
