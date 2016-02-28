@@ -13,6 +13,7 @@ FlowRouter.route('/', {
 
 Template.mmenu.onRendered(function() {
     $.SmartMenus.Bootstrap.init();
+    $('#mmenu').smartmenus('refresh');
 });
 
 Template.mmenu.helpers({
@@ -42,7 +43,6 @@ Template.mmenu.helpers({
                 result.push(r);
             }
         });
-        $.SmartMenus.Bootstrap.init();
         return result;
     },
     selType: function() {
