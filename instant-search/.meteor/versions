@@ -32,7 +32,6 @@ htmljs@1.0.5
 http@1.1.1
 id-map@1.0.4
 insecure@1.0.4
-joshdellay:jquery-mobile-menu@1.0.5
 jquery@1.11.4
 kadira:flow-router@2.10.1
 launch-screen@1.0.4
@@ -42,6 +41,7 @@ logging@1.0.8
 meteor@1.1.10
 meteor-base@1.0.1
 meteorhacks:picker@1.0.3
+meteorhacks:search-source@1.4.2
 minifiers@1.1.7
 minimongo@1.0.10
 mobile-experience@1.0.1
@@ -59,10 +59,9 @@ reactive-var@1.0.6
 reload@1.1.4
 retry@1.0.4
 routepolicy@1.0.6
-search-source@1.4.4
 session@1.1.1
 sjors:meteor-masonry@0.0.1
-slimmenu@0.0.1
+smartmenus@0.0.1
 spacebars@1.0.7
 spacebars-compiler@1.0.7
 standard-minifiers@1.0.2

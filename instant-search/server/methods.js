@@ -13,12 +13,14 @@ SearchSource.defineSource('movies', function(searchText, options){
         selector.push({type: options.cat});
     }
     if (searchText) {
-        selector.push({
-            "$text": {"$search": searchText}
-        });
+        var parts = searchText.trim().split(' '),
+            regExp = new RegExp("(" + parts.join('|') + ")", "ig"),
+            search = {$or: [{title: regExp}, {yeartype: regExp}, {episode: regExp}, {outline: regExp}, {credit: regExp}]};
+
+        selector.push(search);
     }
-    console.log(searchText, options.genre);
-    console.log(selector);
+    console.log(options.cat, options.genre);
+    console.log("query: ", searchText);
 
     if (selector.length > 0) {
         return Movies.find({"$and": selector}, options).fetch();

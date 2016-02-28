@@ -29,7 +29,7 @@ body{
   margin-left:auto;
   margin-right:auto;
 }
-input[type="text"]:focus {   
+input[type="text"]:focus {
   border-color: rgba(255,255,255, 1);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255,255,255, 0.6);
   outline: 0 none;
@@ -41,19 +41,23 @@ input[type="text"]:focus {
   margin-right:auto;
 }
 
+.large-box {
+  width: 300px;
+}
+
 .jumbotron{
   h1{
     font-weight:300;
     font-family:'Open Sans', Helvetica, Arial, sans-serif;
   }
   a {color: white;}
- 
+
   background: -webkit-linear-gradient(90deg, #DD5E89 10%, #F7BB97 90%); /* Chrome 10+, Saf5.1+ */
   background:    -moz-linear-gradient(90deg, #DD5E89 10%, #F7BB97 90%); /* FF3.6+ */
   background:     -ms-linear-gradient(90deg, #DD5E89 10%, #F7BB97 90%); /* IE10 */
   background:      -o-linear-gradient(90deg, #DD5E89 10%, #F7BB97 90%); /* Opera 11.10+ */
   background:         linear-gradient(90deg, #DD5E89 10%, #F7BB97 90%); /* W3C */
-             
+
   color: white;
   text-align: center;
   padding:0px;
@@ -90,8 +94,8 @@ input[type="text"]:focus {
     width: 200px;
     span{
       margin-right: 10px;
-      -webkit-animation-name:             rotate; 
-      -webkit-animation-duration:         0.5s; 
+      -webkit-animation-name:             rotate;
+      -webkit-animation-duration:         0.5s;
       -webkit-animation-iteration-count:  infinite;
       -webkit-transition-timing-function: linear;
     }
@@ -102,7 +106,7 @@ input[type="text"]:focus {
   from {
     -webkit-transform: rotate(0deg);
   }
-  to { 
+  to {
     -webkit-transform: rotate(360deg);
   }
 }

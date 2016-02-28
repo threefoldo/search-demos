@@ -12,15 +12,8 @@ FlowRouter.route('/', {
 });
 
 Template.mmenu.onRendered(function() {
-    // initialize mobile-menu
-    $('#mmenu').slimmenu({
-        resizeWidth: '480',
-        collapserTitle: 'Main Menu',
-        animSpeed: 'medium',
-        easingEffect: null,
-        indentChildren: false,
-        childrenIndenter: '&nbsp;'
-    });
+    $.SmartMenus.Bootstrap.init();
+    $('#mmenu').smartmenus('refresh');
 });
 
 Template.mmenu.helpers({
@@ -51,5 +44,11 @@ Template.mmenu.helpers({
             }
         });
         return result;
+    },
+    selType: function() {
+       return Session.get('type');
+    },
+    selGenre: function() {
+       return Session.get('genre');
     }
 });
