@@ -42,6 +42,13 @@ Template.mmenu.helpers({
                 result.push(r);
             }
         });
+        $.SmartMenus.Bootstrap.init();
         return result;
+    },
+    selType: function() {
+       return Session.get('type');
+    },
+    selGenre: function() {
+       return Session.get('genre');
     }
 });
